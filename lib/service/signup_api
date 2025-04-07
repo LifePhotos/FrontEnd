@@ -1,0 +1,28 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+
+class ApiService {
+  final String baseUrl;
+
+  ApiService({this.baseUrl = 'http://localhost:8080/register'});  // ✅ 기본 URL 설정
+
+  Future<bool> signUp(String userId, String password, String name) async {
+    final url = Uri.parse(baseUrl);  // ✅ URL 문자열 포맷팅 제거
+    
+    final response = await http.post(
+      url,
+      body: json.encode({
+        'userId': userId, 
+        'password': password,
+        'name': name,
+      }),
+      headers: {'Content-Type': 'application/json'},
+    );
+
+    if (response.statusCode == 200) {
+      return true;  // 성공
+    } else {
+      return false;  // 실패
+    }
+  }
+}
