@@ -4,25 +4,47 @@ import 'package:http/http.dart' as http;
 class ApiService {
   final String baseUrl;
 
-  ApiService({this.baseUrl = 'http://localhost:8080/register'});  // ✅ 기본 URL 설정
+  ApiService({this.baseUrl = 'http://localhost:8080/register'});  // 기본 URL
 
   Future<bool> signUp(String userId, String password, String name) async {
-    final url = Uri.parse(baseUrl);  // ✅ URL 문자열 포맷팅 제거
+    final url = Uri.parse(baseUrl);
     
     final response = await http.post(
       url,
       body: json.encode({
-        'userId': userId, 
+        'userId': userId,
         'password': password,
         'name': name,
       }),
       headers: {'Content-Type': 'application/json'},
     );
 
-    if (response.statusCode == 200) {
-      return true;  // 성공
-    } else {
-      return false;  // 실패
+    return response.statusCode == 200;
+  }
+
+  /// ✅ 아이디 중복 확인 API
+  Future<bool> checkDuplicateId(String userId) async {
+    final url = Uri.parse('http://localhost:8080/checkUser');
+
+    try {
+      final response = await http.post(
+        url,
+        body: json.encode({
+          'username': userId
+        }),
+         headers: {'Content-Type': 'application/json'},
+      );
+
+      if (response.statusCode == 200) {
+        // 서버에서 중복이 아니면 true, 중복이면 false 반환한다고 가정
+        final data = json.decode(response.body);
+        return data['data'];  // 예: {"available": true}
+      } else {
+        return false;
+      }
+    } catch (e) {
+      print('중복 확인 중 오류: $e');
+      return false;
     }
   }
 }

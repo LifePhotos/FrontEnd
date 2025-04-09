@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:life_photo/screens/carmera_home.dart';
 import 'package:life_photo/service/login_api.dart';
-import 'package:life_photo/service/getInage-api.dart';
+import 'package:life_photo/service/Image.dart';
 import 'package:life_photo/model/Image_info.dart';
 import 'package:turn_page_transition/turn_page_transition.dart';
+import 'package:life_photo/screens/ImagePage_screen.dart';  
 
 class MainPage extends StatelessWidget {
   const MainPage({super.key});
@@ -52,24 +53,32 @@ class MainPage extends StatelessWidget {
                                     fontWeight: FontWeight.bold),
                               ),
                               const SizedBox(height: 20),
-                              Expanded(
-                                child: Padding(
-                                  padding: const EdgeInsets.all(16.0),
-                                  child: Image.network(
-                                    item.imageUrl,
-                                    fit: BoxFit.contain,
-                                    loadingBuilder:
-                                        (context, child, loadingProgress) {
-                                      if (loadingProgress == null) return child;
-                                      return const Center(
-                                          child: CircularProgressIndicator());
-                                    },
-                                    errorBuilder:
-                                        (context, error, stackTrace) =>
-                                            const Text('이미지를 불러올 수 없습니다.'),
-                                  ),
-                                ),
-                              ),
+                             Expanded(
+  child: Padding(
+    padding: const EdgeInsets.all(16.0),
+    child: GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => FullScreenImage(imageUrl: item.imageUrl),
+          ),
+        );
+      },
+      child: Image.network(
+        item.imageUrl,
+        fit: BoxFit.contain,
+        loadingBuilder: (context, child, loadingProgress) {
+          if (loadingProgress == null) return child;
+          return const Center(child: CircularProgressIndicator());
+        },
+        errorBuilder: (context, error, stackTrace) =>
+            const Text('이미지를 불러올 수 없습니다.'),
+      ),
+    ),
+  ),
+),
+
                             ],
                           ),
                         ),
