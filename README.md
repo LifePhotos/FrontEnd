@@ -30,7 +30,12 @@ Flutter + FastAPI 기반으로 개발한 나만의 인생네컷 사진 앨범 �
 
 | 로그인 | 회원가입 | 메인화면 |
 |--------|-----------|----------------|
-| ![login](https://github.com/user-attachments/assets/4c8f5c85-28ef-4ca1-88e9-383fa0525bc8) | ![main](https://github.com/user-attachments/assets/567b811d-7ce5-4b56-be2a-ac72fffaad0e) | ![upload](https://github.com/user-attachments/assets/be6856c2-b3fd-4d25-891f-ddfad17aa6bf) |
+| ![login](https://github.com/user-attachments/assets/4c8f5c85-28ef-4ca1-88e9-383fa0525bc8) | ![스크린샷 2025-04-09 오후 10 58 48](https://github.com/user-attachments/assets/2b3c11c1-8fa8-464c-84da-06ea7c8636b9)| ![스크린샷 2025-04-17 오후 7 32 16](https://github.com/user-attachments/assets/3b97aba2-2156-451c-88c6-f07a38ccb545) |
+
+
+
+
+
 
 
 ## 📦 프로젝트 구조
